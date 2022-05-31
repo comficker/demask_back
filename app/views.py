@@ -197,3 +197,4 @@ def import_opensea(request):
                         rarity=rarity
                     )
                 asset.traits.add(check)
+    return Response(status=status.HTTP_201_CREATED)
