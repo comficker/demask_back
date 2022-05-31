@@ -189,7 +189,7 @@ def import_opensea(request):
                         value=trait["value"],
                     ).first()
                     if check is None:
-                        check = Trait.objects.get_or_create(
+                        check = Trait.objects.create(
                             contract=contract,
                             field=trait["trait_type"],
                             value=trait["value"],
