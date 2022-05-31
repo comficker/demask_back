@@ -21,15 +21,18 @@ def sync_range(start, end):
         item_ids = os.listdir("{}/{}".format(root, d))
         filtered = list(filter(check_number, item_ids))
         filtered = list(map(lambda x: int(x), filtered))
+        dataset = []
         for f in filtered:
             if f < start or f > end:
                 continue
             file = open("{}/{}/{}/data.json".format(root, d, f))
             data = json.load(file)
-            requests.post('/', json={
-                **data,
-                "pwd": "DKMVKL"
-            })
+            dataset.append(data)
+        requests.post('https://touch.demask.io/import-opensea', json={
+            "dataset": dataset,
+            "pwd": "DKMVKL"
+        })
+
 
 
 class Command(BaseCommand):
