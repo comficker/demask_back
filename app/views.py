@@ -183,13 +183,17 @@ def import_opensea(request):
                 rarity = 0
                 if int(data["asset_contract"]["total_supply"]) > 0:
                     rarity = trait["trait_count"] / int(data["asset_contract"]["total_supply"])
-                trait_instance, _ = Trait.objects.get_or_create(
+                check = Trait.objects.filter(
                     contract=contract,
                     field=trait["trait_type"],
                     value=trait["value"],
-                    defaults={
-                        "kind_format": trait["display_type"] or "text",
-                        "rarity": rarity
-                    }
-                )
-                asset.traits.add(trait_instance)
+                ).first()
+                if check is None:
+                    check = Trait.objects.get_or_create(
+                        contract=contract,
+                        field=trait["trait_type"],
+                        value=trait["value"],
+                        kind_format=trait["display_type"] or "text",
+                        rarity=rarity
+                    )
+                asset.traits.add(check)
