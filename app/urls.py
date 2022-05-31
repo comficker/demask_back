@@ -13,4 +13,5 @@ router.register(r'transactions', views.TransactionViewSet)
 urlpatterns = [
     path(r'', include(router.urls)),
     path(r'update-mask', views.update_mask),
+    path(r'import-opensea', views.import_opensea),
 ]
