@@ -28,10 +28,11 @@ def sync_range(start, end):
             file = open("{}/{}/{}/data.json".format(root, d, f))
             data = json.load(file)
             dataset.append(data)
-        requests.post('https://touch.demask.io/import-opensea', json={
+        res = requests.post('https://touch.demask.io/import-opensea', json={
             "dataset": dataset,
             "pwd": "DKMVKL"
         })
+        print(res.status_code)
 
 
 

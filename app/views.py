@@ -140,7 +140,7 @@ def update_mask(request):
 @api_view(['POST'])
 def import_opensea(request):
     if request.data.get("pwd") == "DKMVKL":
-        for data in request.data["dataset"]
+        for data in request.data["dataset"]:
             links = {
                 "external_url": data["collection"]["external_url"],
                 "discord": data["collection"]["discord_url"],
