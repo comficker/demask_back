@@ -6,9 +6,9 @@ from django.db.models import Sum
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        # traits = Trait.objects.all()
-        # for trait in traits:
-        #     trait.calculate()
+        traits = Trait.objects.all()
+        for trait in traits:
+            trait.calculate()
 
         assets = Asset.objects.all()
         for asset in assets:
