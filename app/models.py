@@ -44,8 +44,9 @@ class Trait(models.Model):
         )
 
     def calculate(self):
-        self.rarity = self.assets.count() / self.contract.assets.count()
-        self.save()
+        if self.rarity == 0:
+            self.rarity = self.assets.count() / self.contract.assets.count()
+            self.save()
 
 
 class Asset(models.Model):
