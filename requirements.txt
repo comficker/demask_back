@@ -8,6 +8,7 @@ base58==2.1.1
 bitarray==1.2.2
 certifi==2021.10.8
 charset-normalizer==2.0.12
+cloudscraper==1.2.60
 cytoolz==0.11.2
 Django==4.0.4
 django-cors-headers==3.11.0
@@ -38,10 +39,12 @@ parsimonious==0.8.1
 protobuf==3.20.1
 psycopg2==2.9.3
 pycryptodome==3.14.1
+pyparsing==3.0.9
 pyrsistent==0.18.1
 python-dotenv==0.20.0
 pytz==2022.1
 requests==2.27.1
+requests-toolbelt==0.9.1
 rlp==2.0.1
 six==1.16.0
 sqlparse==0.4.2
