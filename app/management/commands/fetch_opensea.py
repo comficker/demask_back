@@ -25,9 +25,11 @@ def crawl(chain_id, address, page):
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('chain_id', type=str)
-
-    def add_arguments(self, parser):
         parser.add_argument('address', type=str)
+        parser.add_argument('cursor', type=str)
 
     def handle(self, *args, **options):
-        crawl(options['chain_id'], options['address'], "")
+        crawl(options['chain_id'], options['address'], options['cursor'])
+# 0x75335297cb5029c2a9acb2b47507f18ffd48e96c
+# LXBrPTQ0ODg5OTcxOA==
+
