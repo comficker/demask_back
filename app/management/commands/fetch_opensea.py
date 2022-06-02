@@ -19,6 +19,8 @@ def crawl(address, page):
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+        parser.add_argument('address', type=str)
 
     def handle(self, *args, **options):
-        crawl("0x75335297cb5029c2a9acb2b47507f18ffd48e96c", "")
+        crawl(options['address'], "")
