@@ -13,14 +13,13 @@ class Command(BaseCommand):
             total = contract.assets.count()
             traits = contract.traits.all()
             for trait in traits:
-                if trait.rarity == 1:
+                if total > 0:
                     trait.rarity = trait.assets.count() / total
                     trait.save()
-                    print(trait.id)
+                    print("trait: {}".format(trait.id))
             if len(traits) > 0:
                 assets = contract.assets.all()
                 for asset in assets:
-                    if asset.rarity == 1:
-                        asset.rarity = asset.traits.aggregate(Sum('rarity'))['rarity__sum'] / asset.traits.count()
-                        asset.save()
-                        print(asset.id)
+                    asset.rarity = asset.traits.aggregate(Sum('rarity'))['rarity__sum'] / asset.traits.count()
+                    asset.save()
+                    print("asset: {}".format(asset.id))
