@@ -37,7 +37,7 @@ def parse_opensea(data, chain_id="ethereum"):
                 data["token_id"]
             ),
             "desc": data["description"][:260] if data["description"] else data["collection"]["description"],
-            "uri": data["token_metadata"],
+            "uri": data["token_metadata"] if data["token_metadata"] and len(data["token_metadata"]) < 500 else None,
             "owner": data["owner"]["address"] if data["owner"] else None,
             "media_origin": data["image_original_url"],
             "media": data["image_url"],
