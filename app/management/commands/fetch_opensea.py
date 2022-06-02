@@ -29,7 +29,7 @@ class Command(BaseCommand):
         parser.add_argument('cursor', type=str)
 
     def handle(self, *args, **options):
-        crawl(options['chain_id'], options['address'], options['cursor'])
+        crawl(options['chain_id'], options['address'], options.get('cursor', ""))
 # 0x75335297cb5029c2a9acb2b47507f18ffd48e96c
 # LXBrPTQ0ODg5OTcxOA==
 

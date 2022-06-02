@@ -55,7 +55,7 @@ class Asset(models.Model):
 
     name = models.CharField(max_length=120)
     desc = models.CharField(max_length=500, null=True, blank=True)
-    uri = models.CharField(max_length=150, null=True, blank=True)
+    uri = models.CharField(max_length=500, null=True, blank=True)
     external_link = models.CharField(max_length=150, null=True, blank=True)
 
     owner = models.CharField(max_length=50)
