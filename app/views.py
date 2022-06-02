@@ -90,6 +90,7 @@ class ContractViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveA
     models = Contract
     queryset = models.objects.order_by('-id').distinct()
     serializer_class = serializers.ContractSerializer
+    pagination_class = Pagination
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['assets__owner']
     lookup_field = "address"
