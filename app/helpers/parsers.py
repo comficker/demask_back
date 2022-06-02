@@ -16,7 +16,7 @@ def parse_opensea(data):
         chain_id="eth",
         defaults={
             "name": data["asset_contract"]["name"],
-            "desc": data["collection"]["description"],
+            "desc": data["collection"]["description"][:260] if data["collection"]["description"] else None,
             "is_approved": True,
             "token_schema": data["asset_contract"]["schema_name"],
             "token_symbol": data["asset_contract"]["symbol"],

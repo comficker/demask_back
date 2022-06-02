@@ -1,5 +1,6 @@
 import cloudscraper
 import json
+import requests
 from django.core.management.base import BaseCommand
 from app.helpers import parsers
 
@@ -12,8 +13,13 @@ def crawl(address, page):
     scraper = cloudscraper.create_scraper()
     res = scraper.get(url).text
     body = json.loads(res)
-    for data in body.get("assets", []):
-        parsers.parse_opensea(data)
+    res = requests.post('https://touch.demask.io/import-opensea', json={
+        "dataset": body.get("assets", []),
+        "pwd": "DKMVKL"
+    })
+    print(res.status_code)
+    # for data in body.get("assets", []):
+    #     parsers.parse_opensea(data)
     if body.get("next"):
         crawl(address, body.get("next"))
 
