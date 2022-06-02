@@ -25,6 +25,9 @@ def parse_opensea(data, chain_id="ethereum"):
             "links": links
         }
     )
+    current_price = 0
+    if data.get("last_sale") and data["last_sale"].get("total_price"):
+        current_price = int(data["last_sale"]["total_price"]) / pow(10, 18)
     asset, is_created = Asset.objects.get_or_create(
         contract=contract,
         item_id=data["token_id"],
@@ -38,7 +41,8 @@ def parse_opensea(data, chain_id="ethereum"):
             "owner": data["owner"]["address"] if data["owner"] else None,
             "media_origin": data["image_original_url"],
             "media": data["image_url"],
-            "external_link": data["external_link"]
+            "external_link": data["external_link"],
+            "current_price": current_price
         }
     )
     if is_created:
