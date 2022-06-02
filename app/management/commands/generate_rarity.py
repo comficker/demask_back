@@ -4,12 +4,11 @@ from django.db.models import Sum
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+        parser.add_argument('addresses', type=str)
 
     def handle(self, *args, **options):
-        contracts = Contract.objects.filter(address__in=[
-            "0x75335297cb5029c2a9acb2b47507f18ffd48e96c",
-            "0x986aea67c7d6a15036e18678065eb663fc5be883"
-        ])
+        contracts = Contract.objects.filter(address__in=options["addresses"].split("|"))
         for contract in contracts:
             total = contract.assets.count()
             traits = contract.traits.all()
