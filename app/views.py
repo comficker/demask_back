@@ -142,5 +142,5 @@ def update_mask(request):
 def import_opensea(request):
     if request.data.get("pwd") == "DKMVKL":
         for data in request.data["dataset"]:
-            parsers.parse_opensea(data)
+            parsers.parse_opensea(data, request.data.get("chain_id", "ethereum"))
     return Response(status=status.HTTP_201_CREATED)

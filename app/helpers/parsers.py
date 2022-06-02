@@ -1,7 +1,7 @@
 from app.models import Asset, Contract, Trait
 
 
-def parse_opensea(data):
+def parse_opensea(data, chain_id="ethereum"):
     links = {
         "external_url": data["collection"]["external_url"],
         "discord": data["collection"]["discord_url"],
@@ -13,7 +13,7 @@ def parse_opensea(data):
     }
     contract, _ = Contract.objects.get_or_create(
         address=data["asset_contract"]["address"],
-        chain_id="eth",
+        chain_id=chain_id,
         defaults={
             "name": data["asset_contract"]["name"],
             "desc": data["collection"]["description"][:260] if data["collection"]["description"] else None,
