@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 from django.conf.urls import include
+from django.urls import re_path
+from . import view
 
 urlpatterns = [
     path(r'', include(('app.urls', 'app'))),
+    re_path(r'^main-sitemap.xsl', view.sitemap_style),
+    re_path(r'^sitemap_index.xml', view.sitemap_index),
+    re_path(r'(?P<flag>[-\w.]+)-sitemap.xml$', view.sitemap_detail),
 ]
