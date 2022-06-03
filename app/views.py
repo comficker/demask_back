@@ -82,7 +82,9 @@ class AssetViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveAPIV
                 item_id=request.GET.get("related"),
                 contract__address=request.GET.get("contract__address")
             )
-            queryset = queryset.filter(rarity=related.rarity)
+            mn = related.rarity - 0.2
+            mx = related.rarity + 0.2
+            queryset = queryset.filter(rarity__gt=mn, rarity__lt=mx)
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
