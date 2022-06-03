@@ -77,6 +77,12 @@ class AssetViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveAPIV
                 self.paginator, 'most_expensive',
                 serializers.AssetSerializer(queryset.order_by('-current_price').first()).data
             )
+        if request.GET.get("related") and request.GET.get("contract__address"):
+            related = Asset.objects.get(
+                item_id=request.GET.get("related"),
+                contract__address=request.GET.get("contract__address")
+            )
+            queryset = queryset.filter(rarity=related.rarity)
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)

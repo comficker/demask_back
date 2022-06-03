@@ -20,6 +20,8 @@ class Command(BaseCommand):
             if len(traits) > 0:
                 assets = contract.assets.all()
                 for asset in assets:
-                    asset.rarity = asset.traits.aggregate(Sum('rarity'))['rarity__sum'] / asset.traits.count()
-                    asset.save()
-                    print("asset: {}".format(asset.id))
+                    rarity__sum = asset.traits.aggregate(Sum('rarity'))['rarity__sum']
+                    if rarity__sum:
+                        asset.rarity = asset.traits.aggregate(Sum('rarity'))['rarity__sum'] / asset.traits.count()
+                        asset.save()
+                        print("asset: {}".format(asset.id))
